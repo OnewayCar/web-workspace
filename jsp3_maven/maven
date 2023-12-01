@@ -1,0 +1,19 @@
+빌드 도구 maven (많이 쓰이는 빌드 도구 : maven, gradle)
+
++ pom.xml 
++ 외부 라이브러리 관리
++ 빌드 : 컴파일부터 최종 소프트웨어 산출물 생성
+		실행에 필요한 모든 것들을 포함하여 만들어야합니다.
+		- 자바 소스파일
+		- 정적 리소스 : 이미지, html, js, css
++ JAVA에서 최종 산출물은 일반적 압축파일(패키징)
+		.jar : 일반적인 자바 애플리케이션으로 만들어짐. 스프링부트도 포함
+		.war : 서블릿/jsp 웹컨테이너가 처리해야할 애플리케이션.
+		
+
+2. maven web project
+	1) dynamic web project 만들기
+	2) 프로젝트 우클릭 > configure > Convert to Maven Project
+		패키징 필수 확인 : finish, pom.xmk
+	3) pm.xml에 필요런 와부 라이브러리 추가 => 의존설 추가
+	<dependecies> 태그 안에 필요한 <dependcy>들을 포함
