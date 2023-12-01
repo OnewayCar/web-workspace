@@ -1,0 +1,27 @@
+@charset "UTF-8";
+section{
+	box-sizing: border-box;
+	min-height: 70%;
+	padding: 20px;
+	text-align: center;
+	/* 컨텐츠 내용만큼 높이만 지정되는 것을 최소 높이 지정하여 바꾸기 */
+	/* min-height: 600px; */
+	background-color: #E0E0E0;
+}
+table{
+	border: 1px solid black;
+	width: 800px;
+	margin: auto;
+	background-color: #E0E0E0;
+}
+tr,th,td{
+	border: 1px solid black;
+}
+td{
+	padding: 5px;
+}
+a:nth-child(1){
+	color: white;
+	text-decoration: none;
+}
+

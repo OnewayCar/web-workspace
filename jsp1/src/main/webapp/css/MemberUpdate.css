@@ -1,0 +1,37 @@
+@charset "UTF-8";
+section{
+	box-sizing: border-box;
+	min-height: 70%;
+	padding: 20px;
+	text-align: center;
+	/* 컨텐츠 내용만큼 높이만 지정되는 것을 최소 높이 지정하여 바꾸기 */
+	/* min-height: 600px; */
+	background-color: #E0E0E0;
+}
+table{
+	border: 1px solid black;
+	width: 600px;
+	margin: auto;
+	background-color: #E0E0E0;
+}
+tr,td{
+	border: 1px solid black;
+}
+
+td{
+	padding: 3px;
+}
+input[type=text],input[type=number],select{
+	float: left;
+	
+}
+input[type=text],input[type=number]{
+	width: 80%;
+}
+button{
+	cursor: pointer;
+	background-color: white;
+	border:none;
+	border-radius: 4px;
+	
+}
