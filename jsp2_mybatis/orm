@@ -1,0 +1,62 @@
+1. ORM (Object-Relationship-Mapping) 프레임워크
+	ㄴ Object : 자바의 객체
+	ㄴ Relationship : 데이터베이스의 테이블
+	ㄴ Mapping : 사상(대응)
+데이터베이스의 테이블과 자바의 객체 사이의 변환을 자동으로 해주는 기능
+
+2. ORM 프레이워크 중 하나로 Mybatis를 사용해서 기존 JDBC 방식으로 직접 코딩했던 변환을 쉽게합니다.
+
+3. mybatis.org 에서 라이브러리 .jar 다운로드 및 사용에 대한 설명을 볼 수 있음
+
+4. bybatis 소스파일
+	sqlSessionBean : 개발자가 만든 파일. SqlSession 구현 객체를 생성이 목적.
+	mybatis-config.xml : db연결 설정을 저장한 파일
+	orders.xml : sql 매퍼
+	db.properties : driver, url, username, password 정보를 저장
+	
+	
+* xml : eXtensible Markup	Language  : 확장된 마크업 언어 
+* html : 정해진 목적애 따라 등록해서 데이터를 저장
+		또는 태그의 설정된 내용에 따라 자바 객체를 생성하기도 합니다.
+		
+* 마이바티스 xml은 !DOCTYPE 태그 안에 xml 문서타입을 정의하는 url이 꼭 작성되어있어야
+	목적에 맞는 태그를 사용할 수 있다.
+		
+5. SQL 매퍼 파일
+- select, insert, update, delete 등이 태그 이름. 실행한 sql에 따라 태그를 선택
+- id 속성 : 개발자가 정의한는 sql 식별 문자열
+- Parameter Type : sql 실행에 필요한 파라미터 데이터 타입을 알려주기
+- Result Type : sql 실행 후에 리턴되는 결과의 데이터 타입 알려주기	
+위의 2가지 타입 예시 : 	String, int, long, java.util.Map, sample.dto.OrderDto...
+-최상위 Mapper 태그 : namespace 속성으로 mapper파일을 구분하게 합니다.
+				id가 동일할 때는 namepsce로 구분하기
+-동적SQL : if태그로 조건 검사 후 실행할 sql을 선택.
+- db 테이블의 '컬럼'과 자바객체의 '필드'를 자도 매핑 : select 기준으로 이름으로 매핑함으로 필드명과 컬럼명 일치해야함
+
+
+
+6. mybatis에서 sql을 실행시키는 객체 : SqlSession 인터페이스 구현 객체
+   sqlSession의 메소드 : insert, update, delete의 sql메소드는 이름이 sql 명령과 동일
+   : selectList(여러개 행이 조회될 때), selectOne(pk로 조회할 때) 
+   
+   
+
+7.sqlSession을 만드는 과정 - sqlSesionBean 클래스로 정의했습니다.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+파일업로드에서는 일반적인 request가 아닌 MultipartRequest를 사용합니다.
+ 								--> 외부 라이브러리 필요합니다.(종류는 여러가지 : cos, jar 사용)
+다운로드 : mvnrepository.com

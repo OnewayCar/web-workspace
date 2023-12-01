@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="order"> <!-- namespace 는 다른 mapper가 있을수도 있어서 이름 설정은 해주는게 좋음 -->
+ <!-- sql 실행에 필요한 값 또는 조회결과 값 과 자바 객체를 매핑합니다. -->
+    <select id="selectOrderByEmail" resultType="String">
+    select 
+       distinct email 
+    from 
+       orders
+    </select>
+    
+    <select id="selectByEmail" resultType="sample.dto.OrderDto" parameterType="String">
+    select * from 
+       orders 
+    where email = #{email}
+    </select>
+    
+    <!-- insert,update,delete 는 기본 리턴타입이 int -->
+    <insert id="insert" parameterType="sample.dto.OrderDto">
+    insert into 
+       orders 
+    values
+       (#{email},#{pcode},#{quantity},sysdate)
+    </insert>
+    <!-- ${} 는 출력, #{} 저장(파라미터 변수명 표시) -->
+    
+ </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
