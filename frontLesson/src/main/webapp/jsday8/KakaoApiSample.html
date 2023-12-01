@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>KakaoApiSample</title>
+</head>
+<body>
+<!-- 상태코드 참고(Status code) / 요청메소드(Request Method) : https://ko.wikipedia.org/wiki/HTTP -->
+<p id="result"></p>
+<button id="apiBtn">카카오API 테스트</button>
+<script type="text/javascript">
+// 함수 정의(화살표 함수)
+const testKakao=()=>{
+	// 초창기 데이터api가 xml만 제공했기 때문에 XML이 이름에 붙어있음
+	const xhr = new XMLHttpRequest()
+	
+	// 요청 파라미터를 QueryString 즉 하나의 문자열로 만들기
+	let query = '권은비'
+	let sort = 'recency'		// 최신순 : recency, 정확도순 : accuracy
+	let page = 1
+	let size = 10
+	
+	// 요청 URL을 설정 : 메소드 방식 GET(조회), POST(저장)
+	xhr.open('GET', `https://dapi.kakao.com/v2/search/vclip?query=${query}&sort=${sort}&page=${page}&size=${size}` )
+	// 요청헤더를 추가. 카카오API에서 정해진내용. 인증과 관련된 항목
+	xhr.setRequestHeader('Authorization','KakaoAK c6dd2271379378fd68963521f6c489bc')	
+	// 요청을 보내는 메소드. 
+	xhr.send()
+	
+	let result=''
+	// onload는 응답이 오면 발생하는 이벤트. 이벤트에 대한 처리함수를 정의합니다.
+	xhr.onload=function(){
+		// 요청 처리 결과에 대한 상태 코드 값은 status property로 확인
+		if(xhr.status==200){
+			alert('kakao 검색 응답을 받았습니다.')
+			// xhr.response는 응답으로 받은 내용을 저장하는 xhr의 property
+			// xhr.response는 json 문자열. 
+			let $response = JSON.parse(xhr.response)	// json문자열을 자바스크립트 객체로 변환
+			result = $response.documents	// 객체의 document property만 변수에 저장
+		}// if
+		
+		console.log(result) 	// 콘솔에 출력
+	}	// xhr.onload function 
+}// testKakao
+document.getElementById('apiBtn').addEventListener('click',testKakao)
+</script>
+<!--  
+##### 비동기처리
++ 동기식 통신은 요청-응답이 순서대로 이루어지는 통신. 
++ 비동기 통신은 요청-응답이 항상 순서를 지키지 않음.
++ 자바스크립트(엔진)는 싱글스레드 방식으로 동작하지만 브라우저는 멀티스레드 방식이므로 비동기 처리가 가능한다.
++ 브라우저는 자바스크립트 엔지, 렌더딩 엔진, WebAPI를 제공한다.
++ 자바스크립트에서 비동기 처리를 수행하는 비동기 함수는 콜백 패턴을 사용한다.
++ setTimeout(Web API), setInterval, HTTP 요청, 이벤트핸들러는 비동기 처리 방식으로 동작한다.
+
+##### synchronous 동기 방식 
++ 서버에 요청 ->  서버 처리 -> 서버 응답  의 동작을
+<html> 에서 </html> 까지 완전한 html 문서를 서버로부터 받아서 브라우저에 표시한다.
++ 일부분만 변경되는 요청이 발생해도 매번 요청에 대해 문서 전체 html 응답을 생성한다. (불필요한 서버의 처리와 통신 발생)
++ 서버로부터 응답을 받기까지 다음 처리는 대기한다.(blocking)
+
+
+-->
+
+</body>
+</html>

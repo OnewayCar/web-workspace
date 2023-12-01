@@ -1,0 +1,74 @@
+	<!-- 1. 입실날짜는 오늘 날짜로 초기화
+	 2. 퇴실날짜는 선택한 숙박일수 + 입실날짜로 합니다. 8/2 입실 + 3박 ? => 8/5 퇴실
+	 3. 퇴실날짜는 select 태긍서 숙박일수 선택하면 자동으로 게산되어 표기 <= click 혹은 change 이벤트
+	 4-1. 입실날짜는 오늘 이전 날짜는 선택 못하도록 해야 함 (input태그의 min 속성)
+	 4-2. 입실날짜는 오늘 기준 3달 이내로만 설정할 수 있음. (input태그의 max 속성)
+	 ** 참고 : input type=date 인 경우 value는 '연도(4자리)-월(2자리)-일(2자리)'문자열로 설정 **
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dateFormSample</title>
+</head>
+<body>
+<form action="">	<!-- 동기방식의 서버-클라이언트 동작에서 form 태그 사용 -->
+	<label for="selectNight">숙박일수</label>
+	<select name = "days" id="selectNight">
+		<option value ="0">선택</option>
+		<option value ="1">1박</option>
+		<option value ="2">2박</option>
+		<option value ="3">3박</option>
+		<option value ="4">4박</option>
+	</select><br>
+	<label for="enterDate">입실날짜 :</label>
+	<input type="date" name="start" id="enterDate" ><br> 
+	<label for="outDate">퇴실날짜 :</label>
+	<input type="date" name="end" id="outDate"><br> 
+</form>
+<script type="text/javascript">
+
+const start = document.forms[0].start	// 입실날짜요소
+const end = document.forms[0].end	// 퇴실날짜요소
+const days = document.forms[0].days	// 숙발일수요소
+
+
+// 선택상자(드롭다운,콤보)에서는 change 이벤트도 가능
+document.getElementById('selectNight').addEventListener('click',calculateEnd)	
+
+// 반드시 change 이벤트
+document.getElementById('enterDate').addEventListener('change',calculateEnd)
+
+// 입실 날짜 요소의 초기화
+let today = new Date()
+start.value = dateFormat(today,'-')
+start.min=dateFormat(today,'-')
+today.setMonth(today.getMonth()+3)
+start.max=dateFormat(today,'-')
+
+// 숙박일수 또는 입실날짜 선택할 때의 이벤트 함수
+function calculateEnd(){
+	console.log(start.value)
+	console.log(end.value)
+	console.log(days.value)
+// 퇴실날짜 : start.value는 문자열이므로 date형식으로 바꾸어서 + 숙박일수.
+// 문자열로 변경해서 퇴실날짜 요소의 valueㄹ 설정
+	
+	
+	let tmp = new Date(start.value)
+	tmp.setDate(tmp.getDate()+Number(days.value))
+	end.value=dateFormat(tmp,'-')
+
+}
+function dateFormat(vdate,symbol){
+	const year = vdate.getFullYear()
+	const month = (vdate.getMonth()+1).toString().padStart(2,'0')
+	const date = vdate.getDate().toString().padStart(2,'0')
+	let result= [year,month,date].join(symbol)
+	return result
+}
+
+
+</script>
+</body>
+</html>
